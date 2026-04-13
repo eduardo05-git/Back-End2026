@@ -30,6 +30,29 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
+    // Buscar por ID
+    public Usuario findById(Integer id) {
+        return usuarioRepository.findById(id).orElse(null);
+    }
+
+    // Atualizar usuário
+    public Usuario update(Integer id, Usuario dadosNovos) {
+        Usuario existente = usuarioRepository.findById(id).orElse(null);
+        if (existente == null) return null;
+
+        if (dadosNovos.getNome() != null)          existente.setNome(dadosNovos.getNome());
+        if (dadosNovos.getEmail() != null)         existente.setEmail(dadosNovos.getEmail());
+        if (dadosNovos.getNivelAcesso() != null)   existente.setNivelAcesso(dadosNovos.getNivelAcesso());
+        if (dadosNovos.getStatusUsuario() != null) existente.setStatusUsuario(dadosNovos.getStatusUsuario());
+
+        // Só re-encripta a senha se vier uma nova senha em texto puro
+        if (dadosNovos.getSenha() != null && !dadosNovos.getSenha().startsWith("$2a$")) {
+            existente.setSenha(passwordEncoder.encode(dadosNovos.getSenha()));
+        }
+
+        return usuarioRepository.save(existente);
+    }
+
     // Login
     public Usuario login(String email, String senha) {
         Usuario usuario = usuarioRepository.findByEmail(email);

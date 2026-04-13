@@ -20,7 +20,7 @@ public class Usuario {
     @Column(name = "senha", nullable = false, columnDefinition = "VARBINARY(64)")
     private String senha;
 
-    @Column(name = "nivelAcesso", length = 10)
+    @Column(name = "nivelAcesso", length = 20)
     private String nivelAcesso;
 
     @Lob

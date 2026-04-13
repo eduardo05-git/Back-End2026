@@ -28,6 +28,20 @@ public class UsuarioController {
         return usuarioService.save(usuario);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable Integer id) {
+        Usuario usuario = usuarioService.findById(id);
+        if (usuario != null) return ResponseEntity.ok(usuario);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Usuario usuario) {
+        Usuario atualizado = usuarioService.update(id, usuario);
+        if (atualizado != null) return ResponseEntity.ok(atualizado);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
+    }
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
         String email = credentials.get("email");
