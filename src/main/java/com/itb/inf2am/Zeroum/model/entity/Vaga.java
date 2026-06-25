@@ -20,6 +20,12 @@ public class Vaga {
     @Column(length = 500, nullable = false)
     private String descricao;
 
+    @Column(length = 500)
+    private String requisitos;
+
+    @Column(length = 20)
+    private String modalidade;
+
     @Column(length = 100)
     private String cidade;
 
@@ -41,6 +47,9 @@ public class Vaga {
     @Column(name = "statusVaga", length = 20, nullable = false)
     private String statusVaga;
 
+    @Column(name = "motivoRecusa", length = 500)
+    private String motivoRecusa;
+
     // Getters e Setters
 
     public Integer getId() { return id; }
@@ -54,6 +63,12 @@ public class Vaga {
 
     public String getDescricao() { return descricao; }
     public void setDescricao(String descricao) { this.descricao = descricao; }
+
+    public String getRequisitos() { return requisitos; }
+    public void setRequisitos(String requisitos) { this.requisitos = requisitos; }
+
+    public String getModalidade() { return modalidade; }
+    public void setModalidade(String modalidade) { this.modalidade = modalidade; }
 
     public String getCidade() { return cidade; }
     public void setCidade(String cidade) { this.cidade = cidade; }
@@ -75,4 +90,7 @@ public class Vaga {
 
     public String getStatusVaga() { return statusVaga; }
     public void setStatusVaga(String statusVaga) { this.statusVaga = statusVaga; }
+
+    public String getMotivoRecusa() { return motivoRecusa; }
+    public void setMotivoRecusa(String motivoRecusa) { this.motivoRecusa = motivoRecusa; }
 }
