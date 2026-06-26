@@ -25,4 +25,20 @@ public class AlunoService {
         aluno.setDataCadastro(LocalDateTime.now().withNano(0));
         return alunoRepository.save(aluno);
     }
+
+    public Aluno findById(Integer id) {
+        return alunoRepository.findById(id).orElse(null);
+    }
+
+    public Aluno atualizar(Integer id, Aluno dadosNovos) {
+        Aluno aluno = findById(id);
+        if (aluno == null) return null;
+
+        if (dadosNovos.getBio() != null) aluno.setBio(dadosNovos.getBio());
+        if (dadosNovos.getHabilidades() != null) aluno.setHabilidades(dadosNovos.getHabilidades());
+        if (dadosNovos.getLinkPortfolio() != null) aluno.setLinkPortfolio(dadosNovos.getLinkPortfolio());
+        if (dadosNovos.getLinkCurriculo() != null) aluno.setLinkCurriculo(dadosNovos.getLinkCurriculo());
+
+        return alunoRepository.save(aluno);
+    }
 }

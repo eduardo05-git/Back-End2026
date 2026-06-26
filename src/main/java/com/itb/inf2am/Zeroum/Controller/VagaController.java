@@ -62,4 +62,11 @@ public class VagaController {
         if (vaga != null) return ResponseEntity.ok(vaga);
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Vaga não encontrada");
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletar(@PathVariable Integer id) {
+        boolean removida = vagaService.deletar(id);
+        if (removida) return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Vaga não encontrada");
+    }
 }

@@ -31,6 +31,18 @@ public class Aluno {
     @Column(name = "curriculo")
     private byte[] curriculo;
 
+    @Column(name = "bio", length = 500)
+    private String bio;
+
+    @Column(name = "habilidades", length = 300)
+    private String habilidades;
+
+    @Column(name = "linkPortfolio", length = 255)
+    private String linkPortfolio;
+
+    @Column(name = "linkCurriculo", length = 255)
+    private String linkCurriculo;
+
     @Column(name = "dataNascimento", nullable = false)
     private LocalDate dataNascimento;
 
@@ -72,4 +84,16 @@ public class Aluno {
 
     public String getStatusAluno() { return statusAluno; }
     public void setStatusAluno(String statusAluno) { this.statusAluno = statusAluno; }
+
+    public String getBio() { return bio; }
+    public void setBio(String bio) { this.bio = bio; }
+
+    public String getHabilidades() { return habilidades; }
+    public void setHabilidades(String habilidades) { this.habilidades = habilidades; }
+
+    public String getLinkPortfolio() { return linkPortfolio; }
+    public void setLinkPortfolio(String linkPortfolio) { this.linkPortfolio = linkPortfolio; }
+
+    public String getLinkCurriculo() { return linkCurriculo; }
+    public void setLinkCurriculo(String linkCurriculo) { this.linkCurriculo = linkCurriculo; }
 }

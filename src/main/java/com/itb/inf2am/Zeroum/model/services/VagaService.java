@@ -72,4 +72,10 @@ public class VagaService {
         vaga.setMotivoRecusa(motivo);
         return vagaRepository.save(vaga);
     }
+
+    public boolean deletar(Integer id) {
+        if (!vagaRepository.existsById(id)) return false;
+        vagaRepository.deleteById(id);
+        return true;
+    }
 }
