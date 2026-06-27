@@ -24,8 +24,12 @@ public class UsuarioController {
     }
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
-    public Usuario create(@RequestBody Usuario usuario) {
-        return usuarioService.save(usuario);
+    public ResponseEntity<?> create(@RequestBody Usuario usuario) {
+        Usuario criado = usuarioService.save(usuario);
+        if (criado == null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("E-mail já cadastrado");
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(criado);
     }
 
     @GetMapping("/{id}")

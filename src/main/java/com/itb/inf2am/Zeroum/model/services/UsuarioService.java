@@ -24,6 +24,9 @@ public class UsuarioService {
 
     // Salvar um usuário no banco
     public Usuario save(Usuario usuario) {
+        if (usuarioRepository.findByEmail(usuario.getEmail()) != null) {
+            return null;
+        }
         usuario.setStatusUsuario("ATIVO");
         usuario.setDataCadastro(LocalDateTime.now().withNano(0));
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
