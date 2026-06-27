@@ -1,5 +1,6 @@
 package com.itb.inf2am.Zeroum.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -17,6 +18,7 @@ public class Usuario {
     @Column(length = 100, unique = true, nullable = false)
     private String email;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "senha", nullable = false, columnDefinition = "VARBINARY(64)")
     private String senha;
 
