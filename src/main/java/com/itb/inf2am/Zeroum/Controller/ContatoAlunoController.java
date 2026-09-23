@@ -1,4 +1,4 @@
-package com.itb.inf2am.Zeroum.controller;
+package com.itb.inf2am.Zeroum.Controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import com.itb.inf2am.Zeroum.model.entity.ContatoAluno;
