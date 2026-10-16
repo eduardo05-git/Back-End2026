@@ -17,12 +17,10 @@ public class UsuarioService {
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    // Listar todos os usuários
     public List<Usuario> findAll() {
         return usuarioRepository.findAll();
     }
 
-    // Salvar um usuário no banco
     public Usuario save(Usuario usuario) {
         if (usuarioRepository.findByEmail(usuario.getEmail()) != null) {
             return null;
@@ -33,12 +31,10 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    // Buscar por ID
     public Usuario findById(Integer id) {
         return usuarioRepository.findById(id).orElse(null);
     }
 
-    // Atualizar usuário
     public Usuario update(Integer id, Usuario dadosNovos) {
         Usuario existente = usuarioRepository.findById(id).orElse(null);
         if (existente == null) return null;
@@ -48,7 +44,6 @@ public class UsuarioService {
         if (dadosNovos.getNivelAcesso() != null)   existente.setNivelAcesso(dadosNovos.getNivelAcesso());
         if (dadosNovos.getStatusUsuario() != null) existente.setStatusUsuario(dadosNovos.getStatusUsuario());
 
-        // Só re-encripta a senha se vier uma nova senha em texto puro
         if (dadosNovos.getSenha() != null && !dadosNovos.getSenha().startsWith("$2a$")) {
             existente.setSenha(passwordEncoder.encode(dadosNovos.getSenha()));
         }
@@ -56,10 +51,12 @@ public class UsuarioService {
         return usuarioRepository.save(existente);
     }
 
-    // Login
     public Usuario login(String email, String senha) {
         Usuario usuario = usuarioRepository.findByEmail(email);
         if (usuario != null && passwordEncoder.matches(senha, usuario.getSenha())) {
+            if ("INATIVO".equalsIgnoreCase(usuario.getStatusUsuario())) {
+                return null;
+            }
             return usuario;
         }
         return null;
